@@ -42,12 +42,12 @@ function Index() {
         md={10}
       >
         <Grid item container justify="center" style={marginOffset}>
-          <Grid item xs={2}>
+          <Grid item xs={4} sm={2}>
             <Dropdown />
           </Grid>
         </Grid>
         <CardList marginOffset={marginOffset} />
-        <Grid item>
+        <Grid item style={{ margin: brMatch ? "8%" : null }}>
           <Plot />
         </Grid>
       </Grid>
