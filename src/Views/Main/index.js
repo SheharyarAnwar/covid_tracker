@@ -1,5 +1,5 @@
 //import { useEffect } from "react";
-import { Hidden, Grid, useMediaQuery } from "@material-ui/core";
+import { Hidden, Grid, useMediaQuery, useTheme } from "@material-ui/core";
 import Sidebar from "../../Components/Sidebar/index";
 import Header from "../../Components/Header/index";
 import Dropdown from "../../Components/Dropdown/index";
@@ -10,12 +10,14 @@ function Index() {
   const mdMatch = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const smMatch = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const brMatch = useMediaQuery((theme) =>
-    theme.breakpoints.between("xs", 656)
+    theme.breakpoints.between("xs", window.screen.width * 0.48)
   );
+  const theme = useTheme();
   const match = { mdMatch, smMatch, brMatch };
-  window.addEventListener("resize", () => {
+  /*  window.addEventListener("resize", () => {
     console.log("brMatch:", brMatch, "smMatch:", smMatch, "mdMatch:", mdMatch);
-  });
+  }); */
+  console.log(window.screen.width * 0.48);
   let marginOffset = mdMatch ? { marginBottom: "5%" } : { marginBottom: "5%" };
   let styles = style(match);
   let headerWidth = smMatch ? 12 : 0;
