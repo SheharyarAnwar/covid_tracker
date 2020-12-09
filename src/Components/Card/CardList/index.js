@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "../index";
 import { Grid } from "@material-ui/core";
-function Index() {
+function Index(props) {
   const [cardData, setCardData] = useState([
     { name: "Recovered", number: 0 },
     { name: "Infected", number: 0 },
@@ -12,7 +12,7 @@ function Index() {
   });
   return (
     <>
-      <Grid item container justify="center" style={{ marginBottom: "4%" }}>
+      <Grid item container justify="center" style={props.marginOffset}>
         <Grid item container xs={10} justify="space-evenly" spacing={4}>
           {renderedCards}
         </Grid>

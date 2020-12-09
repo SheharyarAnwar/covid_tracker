@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+//import { makeStyles } from "@material-ui/core";
 
 function Index() {
   return (
@@ -10,9 +11,7 @@ function Index() {
         fullWidth={true}
         options={["new"]}
         selectOnFocus
-        renderInput={(params) => (
-          <TextField {...params} label="Country" margin="normal" />
-        )}
+        renderInput={(params) => <TextField {...params} label="Country" />}
       />
     </>
   );

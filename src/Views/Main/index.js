@@ -16,7 +16,7 @@ function Index() {
   window.addEventListener("resize", () => {
     console.log("brMatch:", brMatch, "smMatch:", smMatch, "mdMatch:", mdMatch);
   });
-
+  let marginOffset = mdMatch ? { marginBottom: "5%" } : { marginBottom: "5%" };
   let styles = style(match);
   let headerWidth = smMatch ? 12 : 0;
   return (
@@ -41,12 +41,12 @@ function Index() {
         xs={12}
         md={10}
       >
-        <Grid item container justify="center" style={{ marginBottom: "5%" }}>
+        <Grid item container justify="center" style={marginOffset}>
           <Grid item xs={2}>
             <Dropdown />
           </Grid>
         </Grid>
-        <CardList />
+        <CardList marginOffset={marginOffset} />
         <Grid item>
           <Plot />
         </Grid>
