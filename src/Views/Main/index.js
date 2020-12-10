@@ -10,7 +10,7 @@ function Index() {
   const mdMatch = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const smMatch = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const brMatch = useMediaQuery((theme) =>
-    theme.breakpoints.between("xs", window.screen.width * 0.48)
+    theme.breakpoints.between("xs", 656)
   );
   const match = { mdMatch, smMatch, brMatch };
   let canvasStyles = {
