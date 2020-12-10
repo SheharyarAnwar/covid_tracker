@@ -1,0 +1,12 @@
+@keyframes animateElement {
+  from {
+    scale: 1;
+  }
+  100% {
+    scale: 1.3;
+    transform: rotate(360deg);
+  }
+}
+.animation {
+  animation: animateElement 3s infinite;
+}

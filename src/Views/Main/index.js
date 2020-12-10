@@ -1,35 +1,21 @@
 import { useState, useEffect } from "react";
 import { Grid, useMediaQuery } from "@material-ui/core";
-
+//Utils
 //Components
 import Sidebar from "../../Components/Sidebar/index";
 import Header from "../../Components/Header/index";
 import Dropdown from "../../Components/Dropdown/index";
 import CardList from "../../Components/Card/CardList/index";
 import Plot from "../../Components/Plot/index";
-import axios from "axios";
 import style from "./styles";
-function Index() {
-  const [countries, setCountries] = useState({});
+function Index(props) {
+  const resource = props.apiData;
+  const countriesObj = resource.countries.read();
+  const [countries, setCountries] = useState(countriesObj);
   const [selectedCountry, setSelectedCountry] = useState("All");
   const [dataSet, setDataSet] = useState([]);
   useEffect(() => {
-    const fetchAndSetData = async () => {
-      const { data } = await axios.get(
-        "https://corona.lmao.ninja/v2/countries?yesterday&sort"
-      );
-      const total = await axios.get(
-        "https://corona.lmao.ninja/v2/all?yesterday"
-      );
-      const countriesObj = {};
-      countriesObj["All"] = { ...total.data };
-      data.map((val) => {
-        return (countriesObj[val.country] = { ...val });
-      });
-      setCountries(countriesObj);
-      setDataSet(makeDataset(countriesObj[selectedCountry]));
-    };
-    fetchAndSetData();
+    setDataSet(makeDataset(countries[selectedCountry]));
   }, []);
   const makeDataset = (val) => {
     const ar = [];
