@@ -1,18 +1,29 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 //import { makeStyles } from "@material-ui/core";
 
-function Index() {
+function Index(props) {
+  const selectionChanged = (e, v) => {
+    props.selectedCountryChanged(v);
+  };
+  const countries = Object.keys(props.countries);
   return (
     <>
-      <Autocomplete
-        id="select-on-focus"
-        fullWidth={true}
-        options={["new"]}
-        selectOnFocus
-        renderInput={(params) => <TextField {...params} label="Country" />}
-      />
+      <Grid item container justify="center" style={{ marginBottom: "3%" }}>
+        <Grid item xs={4} sm={2}>
+          <Autocomplete
+            id="select-on-focus"
+            onChange={selectionChanged}
+            defaultValue="All"
+            disableClearable
+            fullWidth={true}
+            options={countries}
+            selectOnFocus
+            renderInput={(params) => <TextField {...params} label="Country" />}
+          />
+        </Grid>
+      </Grid>
     </>
   );
 }

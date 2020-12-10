@@ -4,9 +4,32 @@ import { useTheme } from "@material-ui/core";
 function Index(props) {
   const ref = createRef();
   const theme = useTheme();
-
   useEffect(() => {
     const canvasRef = ref.current;
+    const data = {
+      labels: ["Recovered", "Infected", "Deaths"],
+      datasets: [
+        {
+          barPercentage: 0.4,
+          data: props.dataSet,
+          backgroundColor: [
+            theme.palette.darkBlue,
+            theme.palette.lightBlue,
+            theme.palette.red,
+          ],
+        },
+      ],
+    };
+    const options = {
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [
+          {
+            ticks: { padding: 10 },
+          },
+        ],
+      },
+    };
     const globalSettings = Chart.defaults.global;
     Chart.defaults.scale.gridLines.drawOnChartArea = false;
     Chart.defaults.scale.ticks.fontColor = theme.palette.black;
@@ -16,32 +39,13 @@ function Index(props) {
     globalSettings.defaultFontFamily = theme.typography.fontFamily;
     const chart = new Chart(canvasRef.getContext("2d"), {
       type: "bar",
-      data: {
-        labels: ["Recovered", "Infected", "Deaths"],
-        datasets: [
-          {
-            barPercentage: 0.4,
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              theme.palette.darkBlue,
-              theme.palette.lightBlue,
-              theme.palette.red,
-            ],
-          },
-        ],
-      },
-      options: {
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [
-            {
-              ticks: { padding: 10 },
-            },
-          ],
-        },
-      },
+      data,
+      options,
     });
-  });
+    return () => {
+      chart.destroy();
+    };
+  }, [theme, ref, props.dataSet]);
   return (
     <>
       <canvas ref={ref}></canvas>

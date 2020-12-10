@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../index";
 import { Grid } from "@material-ui/core";
 function Index(props) {
@@ -7,6 +7,12 @@ function Index(props) {
     { name: "Infected", number: 0 },
     { name: "Deaths", number: 0 },
   ]);
+  useEffect(() => {
+    const newCardData = cardData.map((val, i) => {
+      return { ...val, number: props.dataSet[i] };
+    });
+    setCardData(newCardData);
+  }, [props.dataSet]);
   const renderedCards = cardData.map((val, i) => {
     return <Card name={val.name} key={i} number={val.number} />;
   });
