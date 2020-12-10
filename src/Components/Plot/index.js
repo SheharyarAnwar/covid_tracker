@@ -1,16 +1,12 @@
-import React, { useState, createRef, useEffect } from "react";
+import React, { createRef, useEffect } from "react";
 import Chart from "chart.js";
 import { useTheme } from "@material-ui/core";
 function Index(props) {
-  const [canvasDimensions, setcanvasDimensions] = useState(props.dimensions);
   const ref = createRef();
   const theme = useTheme();
 
   useEffect(() => {
-    setcanvasDimensions(props.dimensions);
-    console.log(canvasDimensions);
     const canvasRef = ref.current;
-
     const globalSettings = Chart.defaults.global;
     Chart.defaults.scale.gridLines.drawOnChartArea = false;
     Chart.defaults.scale.ticks.fontColor = theme.palette.black;
@@ -45,16 +41,10 @@ function Index(props) {
         },
       },
     });
-    chart.canvas.parentNode.style.height = canvasDimensions.height;
-    chart.canvas.parentNode.style.width = canvasDimensions.width;
   });
   return (
     <>
-      <canvas
-        height={canvasDimensions.height}
-        width={canvasDimensions.width}
-        ref={ref}
-      ></canvas>
+      <canvas ref={ref}></canvas>
     </>
   );
 }

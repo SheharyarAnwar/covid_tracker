@@ -7,21 +7,18 @@ import CardList from "../../Components/Card/CardList/index";
 import Plot from "../../Components/Plot/index";
 import style from "./styles";
 function Index() {
-  const [dimensions, setdimensions] = useState({ width: 320, height: 280 });
   const mdMatch = useMediaQuery((theme) => theme.breakpoints.up("md"));
   const smMatch = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const brMatch = useMediaQuery((theme) =>
     theme.breakpoints.between("xs", window.screen.width * 0.48)
   );
   const match = { mdMatch, smMatch, brMatch };
-
-  useEffect(() => {
-    if (brMatch) {
-      setdimensions({ width: 280, height: 255 });
-    } else {
-      setdimensions({ width: 320, height: 280 });
-    }
-  }, [brMatch]);
+  let canvasStyles = {
+    position: "relative",
+    width: brMatch ? 280 : 320,
+    height: brMatch ? 255 : 280,
+    marginBottom: brMatch ? "3%" : 0,
+  };
   let styles = style(match);
   let headerWidth = smMatch ? 12 : false;
   return (
@@ -52,8 +49,8 @@ function Index() {
           </Grid>
         </Grid>
         <CardList marginOffset={{ marginBottom: "3%" }} />
-        <Grid item>
-          <Plot dimensions={dimensions} />
+        <Grid item style={canvasStyles}>
+          <Plot />
         </Grid>
       </Grid>
     </Grid>
